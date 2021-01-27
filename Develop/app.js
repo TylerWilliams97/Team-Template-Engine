@@ -9,6 +9,38 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { type } = require("os");
+const { prompt } = require("inquirer");
+const { name } = require("inquirer");
+
+
+inquirer
+    .prompt([
+      {
+        type:'list',
+        prompt:'What is your position?',
+        choices:["Intern","Engineer","Manager","Employee"],
+        name:"POS"
+      }
+    ]).then(answers => {
+        if(answers === "Intern"){
+            internInput();
+        }
+        if(answers === "Manager"){
+            managerInput();
+        }
+        if(answers === "Engineer"){
+            Engineer
+        }
+    }) 
+        
+
+
+
+
+
+
+
 
 
 // Write code to use inquirer to gather information about the development team members,
