@@ -9,34 +9,84 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { type } = require("os");
-const { prompt } = require("inquirer");
-const { name } = require("inquirer");
 
 
-inquirer
+function EmployeeStart(){
+    inquirer
     .prompt([
       {
-        type:'list',
-        prompt:'What is your position?',
-        choices:["Intern","Engineer","Manager","Employee"],
-        name:"POS"
+        type:'input',
+        message:'What is your name?',
+        name:"name"
+      },
+      {
+          type:'input',
+          message:'What is your ID?',
+          name:'id'
+      },
+      {
+          type:'input',
+          message:'What is your email?',
+          name:'email'
+      },
+      {
+          type:'list',
+          choices:[Manager,Engineer,Intern],
+          name:'role'
       }
     ]).then(answers => {
-        if(answers === "Intern"){
-            internInput();
+       const firstResult = answers;
+       if (firstResult.role === 'Manager'){
+           inquirer
+           .prompt([
+            {
+               type:'input',
+               message:'What is your office #?',
+               name:'officeNumber'
+           }
+        ]).then(answers =>{
+            const managerResult = answers;
+            return managerResult;
+            console.log(firstResult+managerResult);
+        })
+            
+       };
+       if(firstResult.role === 'Engineer'){
+        inquirer
+        .prompt([
+         {
+            type:'input',
+            message:'What is your github?',
+            name:'github'
         }
-        if(answers === "Manager"){
-            managerInput();
+     ]).then(answers =>{
+         const engineerResult = answers;
+         return engineerResult;
+         console.log(firstResult+engineerResult);
+     })
+       };
+       if(firstResult.role === 'Intern'){
+        inquirer
+        .prompt([
+         {
+            type:'input',
+            message:'school name?',
+            name:'school'
         }
-        if(answers === "Engineer"){
-            Engineer
-        }
-    }) 
-        
+     ]).then(answers =>{
+         const internResult = answers;
+         return internResult;
+         console.log(internResult);
+     })
+       };
+    })
 
 
+    
+};
 
+
+EmployeeStart();
 
 
 
