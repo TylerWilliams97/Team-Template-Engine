@@ -9,86 +9,85 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 
-function EmployeeStart(){
+function getName() {
     inquirer
-    .prompt([
-      {
-        type:'input',
-        message:'What is your name?',
-        name:"name"
-      },
-      {
-          type:'input',
-          message:'What is your ID?',
-          name:'id'
-      },
-      {
-          type:'input',
-          message:'What is your email?',
-          name:'email'
-      },
-      {
-          type:'list',
-          choices:[Manager,Engineer,Intern],
-          name:'role'
-      }
-    ]).then(answers => {
-       const firstResult = answers;
-       if (firstResult.role === 'Manager'){
-           inquirer
-           .prompt([
-            {
-               type:'input',
-               message:'What is your office #?',
-               name:'officeNumber'
-           }
-        ]).then(answers =>{
-            const managerResult = answers;
-            return managerResult;
-            console.log(firstResult+managerResult);
+        .prompt({
+            name:'name',
+            type:'input',
+           message:'Enter employee Name'
+        }).then(ans => {
+            return new Promise(ans)
+        }).catch(er =>{
+            console.log(er);
         })
-            
-       };
-       if(firstResult.role === 'Engineer'){
-        inquirer
-        .prompt([
-         {
+};
+function getId() {
+    inquirer
+        .prompt({
+            name:'id',
+            type: 'number',
+            message:'Enter employee Id'
+        }).then(ans => {
+            return new Promise(ans)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+};
+function getEmail() {
+    inquirer
+        .prompt({
+            name:'email',
             type:'input',
-            message:'What is your github?',
-            name:'github'
-        }
-     ]).then(answers =>{
-         const engineerResult = answers;
-         return engineerResult;
-         console.log(firstResult+engineerResult);
-     })
-       };
-       if(firstResult.role === 'Intern'){
-        inquirer
-        .prompt([
-         {
+            message:'Enter employee email address'
+        }).then(ans => {
+            return new Promise(ans)
+        }).catch(err => {
+            console.log(err);
+        })
+};
+function getRole() {
+    inquirer
+        .prompt({
+            name:'role',
+            type:'list',
+            choices:['intern','engineer','manager', 'Employee']
+        }).then(ans => {
+            return ans
+        }).catch(err => {
+            console.log(err);
+        })
+};
+function getGithub() {
+    inquirer
+        .prompt({
+            name:'github',
             type:'input',
-            message:'school name?',
-            name:'school'
-        }
-     ]).then(answers =>{
-         const internResult = answers;
-         return internResult;
-         console.log(internResult);
-     })
-       };
-    })
-
-
-    
+            message:'Enter employee github'
+        }).then(ans => {
+            return ans
+        }).catch(err => {
+            console.log(err);
+        })
+};
+function getOfficeNumber() {
+    inquirer
+        .prompt({
+            name:'officeNumber',
+            type:'number',
+            message:'Enter Office Number'
+        }).then(ans =>{
+            return ans
+        }).catch(err => {
+            console.log(err);
+        })
 };
 
 
-EmployeeStart();
-
-
+new Employee(getName(), getId())
 
 
 
