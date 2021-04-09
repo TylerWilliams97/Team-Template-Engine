@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
+const teamArray = [];
 
 
 function getName() {
@@ -85,9 +86,92 @@ function getOfficeNumber() {
             console.log(err);
         })
 };
+function getSchool() {
+    inquirer
+        .prompt({
+            name:'school',
+            type:'input',
+            message:'enter name of school'
+        }).then(ans =>{
+            return ans
+        }).catch(err =>{
+            console.log(err);
+        })
+};
 
 
-new Employee(getName(), getId())
+
+function getIntern() {
+    inquirer
+        .prompt([{
+            name:'internname',
+            type:'input',
+            message:'enter name'
+        },
+        {
+            name:'internemail',
+            type:'input',
+            message:'enter email'
+        },
+        {
+            name:'internid',
+            type:'input',
+            message:'enter id'
+        },
+        {
+            name:'school',
+            type:'input',
+            message:'enter name of school'
+        }
+    ]).then(ans => {
+        const newIntern = new Intern(ans.internname,ans.internid,ans.internemail,ans.school)
+        teamArray.push(newIntern)
+        assembleTeam()
+    })
+}
+    getIntern();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const createEmployee = async () => {
+    const { employee, ...answers } = await Baseinfo();
+    if (answers.role === "'intern"){
+            getIntern();
+    }
+    if(answers.role === "engineer"){
+            getEngineer();
+    }
+    if(answers.role === "manager"){
+            getManager();
+    }
+    if(answers.role === "employee"){
+            getEmployee();
+    }
+    else{console.log("could not find role");}
+}
+
+
+// render(new Employee("Tyler", 1, "test@test.com"))
+// new Manager()
+// new Intern()
+function assembleTeam() {
+    fs.writeFileSync(outputPath, render(teamArray), "utf-8");
+}
 
 
 
