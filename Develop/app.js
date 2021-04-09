@@ -127,54 +127,118 @@ function getIntern() {
         const newIntern = new Intern(ans.internname,ans.internid,ans.internemail,ans.school)
         teamArray.push(newIntern)
         assembleTeam()
+        runApp()
     })
 }
-    getIntern();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const createEmployee = async () => {
-    const { employee, ...answers } = await Baseinfo();
-    if (answers.role === "'intern"){
-            getIntern();
-    }
-    if(answers.role === "engineer"){
-            getEngineer();
-    }
-    if(answers.role === "manager"){
-            getManager();
-    }
-    if(answers.role === "employee"){
-            getEmployee();
-    }
-    else{console.log("could not find role");}
+function getEngineer() {
+    inquirer
+        .prompt([{
+            name:'engineername',
+            type:'input',
+            message:'enter name'
+        },
+        {
+            name:'engineeremail',
+            type:'input',
+            message:'enter email'
+        },
+        {
+            name:'engineerid',
+            type:'input',
+            message:'enter id'
+        },
+        {
+            name:'github',
+            type:'input',
+            message:'enter github'
+        }
+    ]).then(ans => {
+        const newEngineer = new Engineer(ans.engineername,ans.engineerid,ans.engineeremail,ans.github)
+        teamArray.push(newEngineer)
+        assembleTeam()
+        runApp()
+    })
 }
-
-
-// render(new Employee("Tyler", 1, "test@test.com"))
-// new Manager()
-// new Intern()
+function getManager() {
+    inquirer
+        .prompt([{
+            name:'Managername',
+            type:'input',
+            message:'enter name'
+        },
+        {
+            name:'Manageremail',
+            type:'input',
+            message:'enter email'
+        },
+        {
+            name:'Managerid',
+            type:'input',
+            message:'enter id'
+        },
+        {
+            name:'officenumber',
+            type:'input',
+            message:'enter office number'
+        }
+    ]).then(ans => {
+        const newManager = new Manager(ans.Managername,ans.Managerid,ans.Manageremail,ans.officenumber)
+        teamArray.push(newManager)
+        assembleTeam()
+        runApp()
+    })
+}
+function getEmployee() {
+    inquirer
+        .prompt([{
+            name:'name',
+            type:'input',
+            message:'enter name'
+        },
+        {
+            name:'email',
+            type:'input',
+            message:'enter email'
+        },
+        {
+            name:'id',
+            type:'input',
+            message:'enter id'
+        }
+    ]).then(ans => {
+        const newEmployee = new Employee(ans.name,ans.id,ans.email)
+        teamArray.push(newEmployee)
+        assembleTeam()
+        runApp()
+    })
+}
 function assembleTeam() {
     fs.writeFileSync(outputPath, render(teamArray), "utf-8");
 }
 
-
-
+function runApp() {
+    inquirer
+        .prompt({
+            name:'type',
+            type:'list',
+            message:'what type of employee are you adding?',
+            choices:["Employee","Intern","Engineer","Manager"]
+        }).then(ans => {
+            if(ans.type === "Employee"){
+                getEmployee();
+            }
+            if(ans.type === "Intern"){
+                getIntern()
+            }
+            if(ans.type === "Engineer"){
+                getEngineer()
+            }
+            if(ans.type === "Manager"){
+                getManager()
+            }
+        })
+}
+runApp();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
