@@ -13,91 +13,91 @@ const Employee = require("./lib/Employee");
 const teamArray = [];
 
 
-function getName() {
-    inquirer
-        .prompt({
-            name:'name',
-            type:'input',
-           message:'Enter employee Name'
-        }).then(ans => {
-            return new Promise(ans)
-        }).catch(er =>{
-            console.log(er);
-        })
-};
-function getId() {
-    inquirer
-        .prompt({
-            name:'id',
-            type: 'number',
-            message:'Enter employee Id'
-        }).then(ans => {
-            return new Promise(ans)
-        })
-        .catch(err => {
-            console.log(err);
-        })
-};
-function getEmail() {
-    inquirer
-        .prompt({
-            name:'email',
-            type:'input',
-            message:'Enter employee email address'
-        }).then(ans => {
-            return new Promise(ans)
-        }).catch(err => {
-            console.log(err);
-        })
-};
-function getRole() {
-    inquirer
-        .prompt({
-            name:'role',
-            type:'list',
-            choices:['intern','engineer','manager', 'Employee']
-        }).then(ans => {
-            return ans
-        }).catch(err => {
-            console.log(err);
-        })
-};
-function getGithub() {
-    inquirer
-        .prompt({
-            name:'github',
-            type:'input',
-            message:'Enter employee github'
-        }).then(ans => {
-            return ans
-        }).catch(err => {
-            console.log(err);
-        })
-};
-function getOfficeNumber() {
-    inquirer
-        .prompt({
-            name:'officeNumber',
-            type:'number',
-            message:'Enter Office Number'
-        }).then(ans =>{
-            return ans
-        }).catch(err => {
-            console.log(err);
-        })
-};
-function getSchool() {
-    inquirer
-        .prompt({
-            name:'school',
-            type:'input',
-            message:'enter name of school'
-        }).then(ans =>{
-            return ans
-        }).catch(err =>{
-            console.log(err);
-        })
-};
+// function getName() {
+//     inquirer
+//         .prompt({
+//             name:'name',
+//             type:'input',
+//            message:'Enter employee Name'
+//         }).then(ans => {
+//             return new Promise(ans)
+//         }).catch(er =>{
+//             console.log(er);
+//         })
+// };
+// function getId() {
+//     inquirer
+//         .prompt({
+//             name:'id',
+//             type: 'number',
+//             message:'Enter employee Id'
+//         }).then(ans => {
+//             return new Promise(ans)
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         })
+// };
+// function getEmail() {
+//     inquirer
+//         .prompt({
+//             name:'email',
+//             type:'input',
+//             message:'Enter employee email address'
+//         }).then(ans => {
+//             return new Promise(ans)
+//         }).catch(err => {
+//             console.log(err);
+//         })
+// };
+// function getRole() {
+//     inquirer
+//         .prompt({
+//             name:'role',
+//             type:'list',
+//             choices:['intern','engineer','manager', 'Employee']
+//         }).then(ans => {
+//             return ans
+//         }).catch(err => {
+//             console.log(err);
+//         })
+// };
+// function getGithub() {
+//     inquirer
+//         .prompt({
+//             name:'github',
+//             type:'input',
+//             message:'Enter employee github'
+//         }).then(ans => {
+//             return ans
+//         }).catch(err => {
+//             console.log(err);
+//         })
+// };
+// function getOfficeNumber() {
+//     inquirer
+//         .prompt({
+//             name:'officeNumber',
+//             type:'number',
+//             message:'Enter Office Number'
+//         }).then(ans =>{
+//             return ans
+//         }).catch(err => {
+//             console.log(err);
+//         })
+// };
+// function getSchool() {
+//     inquirer
+//         .prompt({
+//             name:'school',
+//             type:'input',
+//             message:'enter name of school'
+//         }).then(ans =>{
+//             return ans
+//         }).catch(err =>{
+//             console.log(err);
+//         })
+// };
 
 
 
@@ -222,10 +222,10 @@ function runApp() {
             name:'type',
             type:'list',
             message:'what type of employee are you adding?',
-            choices:["Employee","Intern","Engineer","Manager"]
+            choices:["Intern","Engineer","Manager","Finish"]
         }).then(ans => {
-            if(ans.type === "Employee"){
-                getEmployee();
+            if(ans.type === "Finish"){
+                console.log("Check out the html");
             }
             if(ans.type === "Intern"){
                 getIntern()
